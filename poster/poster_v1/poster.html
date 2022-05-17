@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Anomaly Detection on Multispectral Satellite Images using self-supervised Contrastive Learning features
+    extraction</title>
+  <link rel="stylesheet" href="poster.css">
+
+  <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1">
+  <!-- Based on a poster template from https://github.com/cpitclaudel/academic-poster-template -->
+
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap"
+    rel="stylesheet">
+
+  <style type="text/css">
+    html {
+      font-size: 1.15rem
+    }
+  </style>
+</head>
+
+<body vocab="http://schema.org/" typeof="ScholarlyArticle">
+  <header role="banner">
+    <aside>
+      <a href="https://www.thalesgroup.com/fr/espace"><img style="background: none" src="tas.svg"
+          alt="Thales Alenia Space logo"></a>
+    </aside>
+    <div>
+      <h1 property="headline">Anomaly Detection on Multispectral Satellite Images</h1>
+      <h2 property="alternativeHeadline">using self-supervised Contrastive Learning features extraction</h2>
+      <address>
+        <a property="author">Julien Blanchon, 
+          <a href="https://www.enseeiht.fr/fr/formation/formation-ingenieur/departement-sn/programme-sn/parcours-modia.html">N7</a>,
+          France
+           <br />
+          <a property="sourceOrganization"><a href="www.thalesgroup.com/fr/espace">Thales Alenia Space</a>, DeeperVision Dep, Toulouse, France</a>
+      </address>
+      <span class="publication-info">
+        <span property="publisher">Unpublished</span>,
+        <time pubdate property="datePublished" datetime="2021-19-01">January 19, 2022</time>
+      </span>
+    </div>
+    <aside>
+      <a href="https://www.enseeiht.fr/"><img style="background: none" src="n7.png" alt="INP ENSEEIHT"></a>
+      <a href="https://www.insa-toulouse.fr/"><img style="background: none" src="insa.svg" alt="INSA Toulouse"></a>
+    </aside>
+  </header>
+
+  <main property="articleBody">
+    <article property="abstract">
+      <header>
+        <h3>Context</h3>
+      </header>
+
+      <p>
+        Earth observation satellites now play many important, even crucial roles around the world, both in the military and the
+        civil sector. Common commercial use cases are the improvement of agricultural yields or the monitoring of the Earth's
+        weather.
+        <br>
+        
+      </p>
+
+      <ul>
+        For example, they can be used to :
+        <li>Ice melting monitoring
+        </li>
+    
+        <li>Fires and floods monitoring
+        </li>
+
+        <li>Human made structure in protected area monitoring
+        </li>
+      </ul>
+      The following usage examples require the development of anomaly detection algorithms (or rather change detection for the above example)
+
+      
+
+     
+    </article>
+
+    <article>
+      <header>
+        <h3>Motivation</h3>
+      </header>
+      <ul>
+        <li>Fully automated image scanning: With a total area of about 510 million km2 it is not realistic to process such a large
+        amount of data with the use of human work in the process. Deep Learning algorithms have equal, if not better,
+        performance than human evaluation, while having the benefit to scale well better.
+        </li>
+        <br>
+
+        <li>Unsupervised (self-supervised) learning approach: A large part of machine learning algorithms relies on training
+        with labeled data, i.e. data on which we have a "ground truth" to train the algorithm with. However, it is very expensive, if
+        not impossible, to label satellite data by hand to obtain a training dataset. This is why unsupervised, or even
+        self-supervised algorithms are much better choices for this task
+        </li>
+      </ul>
+
+
+    </article>
+
+    <article>
+      <header>
+        <h3>Dataset</h3>
+      </header>
+      <!-- <figure> -->
+        <img style="background: none" src="EUROSAT.jpg" alt="EUROSAT Dataset">
+        <!-- <a href="https://arxiv.org/abs/1709.00029">
+          <figcaption>EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification
+            (1709.00029)</figcaption>
+        </a> -->
+      <!-- </figure> -->
+      <!-- <p><strike> Several datasets were used </strike></p> -->
+        
+      <p>
+      Sentinel-2 is a Copernicus Earth observation mission that acquires high spatial resolution (10 m to 60 m) optical images
+      of land and near-shore waters. The mission is currently a constellation of two satellites, Sentinel-2A and Sentinel-2B;
+      a third satellite, Sentinel-2C, is being planned for launch in 2024.
+      </p>
+
+
+      <!-- <img style="background: none" src="Sentinel-2.jpeg" alt="Sentinel-2" > -->
+
+      <p>
+        The "EuroSAT" is a open source dataset of Sentinel-2 satellite image covering 13 multi-spectral bands (in the visible,
+        near infrared and shortwave infrared part of the spectrum) and composed of 10 classes with a total of 27 000 labeled
+        (Forest, River, Sea&Lake...) and georeferenced images. The SimCLR algorithm does not use the data labels, however it
+        allows to evaluate the performance of the algorithm
+      </p>
+    </article>
+
+    <article>
+      <header>
+        <h3>Step 1 - SimCLR features extraction</h3>
+      </header>
+
+      <div class="row">
+        <div class="column">
+          <img src="simclr_anim.gif" alt="SimCLR" width="86.5%">
+        </div>
+        <div class="column">
+          <img src="tsne_anim.gif" alt="TSNE" width="100%">
+        </div>
+      </div>
+
+      
+
+      
+
+      <p>
+        SimCLR is a state of art self-supervised learning model that does not require any human-created labels. 
+        As the name suggest, the model learns to supervise itself.
+      </p>
+      <p>
+        To do so we first apply 2 random augmentations (\(\tau\)) on a same original image (\(x\)) making \(x_i\) and \(x_j\).
+        And we let the model learn that these images still contain 
+        the same visual information after a ConvNet Neural Network (CNN) and a projection head (MLP) forming \(z_i\) and \(z_j\).
+        This leads to the model learning a similar latent representation for the same objects.
+      </p>
+
+      <p>
+        The model is fitted against the “NT-Xent loss” define
+        as \(\ell_{i,j} = -\log
+        \frac{\exp(\mathrm{sim}( z_i, z_j)/\tau)}
+        {\sum_{k=1}^{2N} 1_{k \neq i}\exp(\mathrm{sim}(
+        z_i, z_k)/\tau)}\)
+      </p>
+
+      <!-- <p>
+        Data augmentations are draw from transormation like resizing, color distortion, blurring, noising ...
+      </p> -->
+      <!-- <img style="background: none" src="simclr_aug.png" alt="SimCLR Augmentations"> -->
+
+      
+      <!-- <img style="background: none" src="simclr.png" alt="SimCLR"> -->
+
+    
+      
+    </article>
+
+    <article>
+      <header>
+        <h3>Step 2 - Isolation Forest Anomalie Detection</h3>
+      </header>
+      
+      <p>
+        Once trained the latent space of SimCLR (representation / feature extraction) gives a good representation of the image
+        in terms of features.
+      </p>
+      <p>
+        It is then possible to differentiate different classes of images. Like for example a field or a forest
+      </p>
+      <img style="background: none" src="isolation_split.png" alt="Isolation Forest">
+      <p>
+        This feature extraction can also be used for anomaly detection with an Isolation Forest approach. If the representation
+        of a satellite image is too far from what can be found normally, it is a potential anomaly. For example a burning field
+        will be classified as an anomaly. At the end we get an anomaly score for each given chunk (64x64x13) of image, which
+        leads to the construction of a map of suspected anomaly on Earth.
+      </p>
+
+    </article>
+
+    <article>
+      <header>
+        <h3>Reconstruction-based method</h3>
+      </header>
+      <img style="background: none" src="reconstruction_sim.png" alt="Reconstruction Sim">
+      <div id="blackbox">
+
+      </div>
+    </article>
+
+    <article>
+      <header>
+        <h3>Results and conclusion</h3>
+      </header>
+
+      <div id="blackbox"></div>
+      
+    </article>
+
+  </main>
+
+  <footer>
+    <address class="monospace"> <a>Julien Blanchon</a>
+    </address>
+    <address class="monospace"> <a
+      href="mailto:julien@blanchon.cc">julien@blanchon.cc</a>
+    </address>
+    <span class="credits">
+      Based on <a href="https://github.com/cpitclaudel/academic-poster-template">this</a> open source project
+    </span>
+  </footer>
+</body>
+
+</html>
